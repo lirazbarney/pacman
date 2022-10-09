@@ -40,6 +40,7 @@ public class NewPanels {
     public Location getLoc() {
         return loc;
     }
+    public boolean isEmpty() {return this.contain==0;}
     public void setCanGhostStep(boolean canGhostStep) { this.canGhostStep=canGhostStep; }
     public int getContain(){
         return this.contain;

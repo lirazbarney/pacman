@@ -7,8 +7,9 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
-public class PacmanMap {
+public class PacmanMap extends Thread{
     public static final int rows=31, cols=28;
     public static JFrame frame =new JFrame();
     public static JPanel pmap=new JPanel();
@@ -24,42 +25,44 @@ public class PacmanMap {
     public static Ghost redG, orangeG, cyanG, pinkG;
     public static JButton upb, leftb, rightb, downb;
     public static JPanel panelbuttons;
+    public static boolean isGot=false;
 
     PacmanMap() {
-        frame.setLayout(new GridLayout(2, 1));
-        pmap.setBorder(BorderFactory.createTitledBorder(""));
-        pmap.setLayout(new GridLayout(rows,cols));
-        //panelGrid=new JPanel[rows][cols];
-        for(int x=0; x<rows; x++) {
-            //int y=0; y<cols; y++
-            for(int y=0; y<cols; y++) {
-                panelGrid[x][y]=new NewPanels(x, y, modes[x][y]);
-                //panelGrid[x][y].getPanel().setBorder(BorderFactory.createTitledBorder("("+x+","+y+")"));
-                //panelGrid[x][y].setBackground(colorMapGrid[x][y]);
-                //panelGrid[x][y].setPreferredSize(new Dimension(90, 25));
-                pmap.add(panelGrid[x][y].getPanel());
+        if(steps == 0) {
+            frame.setLayout(new GridLayout(2, 1));
+            pmap.setBorder(BorderFactory.createTitledBorder(""));
+            pmap.setLayout(new GridLayout(rows, cols));
+            //panelGrid=new JPanel[rows][cols];
+            for (int x = 0; x < rows; x++) {
+                //int y=0; y<cols; y++
+                for (int y = 0; y < cols; y++) {
+                    panelGrid[x][y] = new NewPanels(x, y, modes[x][y]);
+                    //panelGrid[x][y].getPanel().setBorder(BorderFactory.createTitledBorder("("+x+","+y+")"));
+                    //panelGrid[x][y].setBackground(colorMapGrid[x][y]);
+                    //panelGrid[x][y].setPreferredSize(new Dimension(90, 25));
+                    pmap.add(panelGrid[x][y].getPanel());
+                }
             }
-        }
-        NewPanels up, next, before, down;
-        for(int x=0;x<rows;x++) {
-            for(int y=0;y<cols;y++) {
-                if(x==0)
-                    up=null;
-                else
-                    up=panelGrid[x-1][y];
-                if(x==rows-1)
-                    down=null;
-                else
-                    down=panelGrid[x+1][y];
-                if(y==0)
-                    before=null;
-                else
-                    before=panelGrid[x][y-1];
-                if(y==cols-1)
-                    next=null;
-                else
-                    next=panelGrid[x][y+1];
-                panelGrid[x][y].setPanels(up, down, next, before);
+            NewPanels up, next, before, down;
+            for (int x = 0; x < rows; x++) {
+                for (int y = 0; y < cols; y++) {
+                    if (x == 0)
+                        up = null;
+                    else
+                        up = panelGrid[x - 1][y];
+                    if (x == rows - 1)
+                        down = null;
+                    else
+                        down = panelGrid[x + 1][y];
+                    if (y == 0)
+                        before = null;
+                    else
+                        before = panelGrid[x][y - 1];
+                    if (y == cols - 1)
+                        next = null;
+                    else
+                        next = panelGrid[x][y + 1];
+                    panelGrid[x][y].setPanels(up, down, next, before);
                 /*if(x==0) {
                     if (y == cols - 1) {
                         panelGrid[x][y].setPanels(null, panelGrid[x + 1][y], null, panelGrid[x][y - 1]);
@@ -78,67 +81,70 @@ public class PacmanMap {
                         }
                     }
                 }*/
+                }
             }
-        }
-        packguy =new PackmanFigure(panelGrid[startRow][startCol]);
-        packguy.getCurrentPanel().setContain(3);
-        //pic.setMaximumSize(packguy.getCurrentPanel().getPanel().getSize());
-        //packguy.getCurrentPanel().getPanel().setBackground(new ImageIcon("C:\\Users\\user\\Desktop\\packman game\\packmanRight3.jpg"));
+            packguy = new PackmanFigure(panelGrid[startRow][startCol]);
+            packguy.getCurrentPanel().setContain(3);
+            //pic.setMaximumSize(packguy.getCurrentPanel().getPanel().getSize());
+            //packguy.getCurrentPanel().getPanel().setBackground(new ImageIcon("C:\\Users\\user\\Desktop\\packman game\\packmanRight3.jpg"));
         /*if(p==null)
             System.out.println("is null");
         else
             System.out.println("is not null");*/
-        //processKeys();
-        redG=new Ghost(panelGrid[10][14], 0, 7);
-        //framePaint();
-        panelbuttons=new JPanel();
-        panelbuttons.setBorder(BorderFactory.createTitledBorder(""));
-        panelbuttons.setLayout(new FlowLayout());
-        upb=new JButton("up button");
-        downb=new JButton("down button");
-        leftb=new JButton("left button");
-        rightb=new JButton("right button");
-        upb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                moveUp();
-            }
-        });
-        downb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                moveDown();
-            }
-        });
-        leftb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                moveLeft();
-            }
-        });
-        rightb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                moveRight();
-            }
-        });
-        panelbuttons.add(upb);
-        panelbuttons.add(rightb);
-        panelbuttons.add(leftb);
-        panelbuttons.add(downb);
-        framePaint();
-        //frame.add(panelbuttons);
+            //processKeys();
+            //JOptionPane.showMessageDialog(frame, panelGrid[10][14].getContain());
+            redG = new Ghost(panelGrid[10][14], 0, 7);
+            //JOptionPane.showMessageDialog(frame, panelGrid[10][14].getContain()+" red "+redG.getLastContain());
+            //framePaint();
+            panelbuttons = new JPanel();
+            panelbuttons.setBorder(BorderFactory.createTitledBorder(""));
+            panelbuttons.setLayout(new FlowLayout());
+            upb = new JButton("up button");
+            downb = new JButton("down button");
+            leftb = new JButton("left button");
+            rightb = new JButton("right button");
+            upb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    moveUp();
+                }
+            });
+            downb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    moveDown();
+                }
+            });
+            leftb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    moveLeft();
+                }
+            });
+            rightb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    moveRight();
+                }
+            });
+            panelbuttons.add(upb);
+            panelbuttons.add(rightb);
+            panelbuttons.add(leftb);
+            panelbuttons.add(downb);
+            framePaint();
+            //frame.add(panelbuttons);
         /*frame.repaint();
         frame.validate();*/
-        frame.setVisible(true);
-        frame.add(pmap);
-        frame.add(panelbuttons);
-        frame.setResizable(true);
-        pmap.setMinimumSize(new Dimension(1400, 780));
-        frame.setPreferredSize(new Dimension(1500, 800));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        processKeys();
-        frame.pack();
+            frame.setVisible(true);
+            frame.add(pmap);
+            frame.add(panelbuttons);
+            frame.setResizable(true);
+            pmap.setMinimumSize(new Dimension(1400, 780));
+            frame.setPreferredSize(new Dimension(1500, 800));
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            processKeys();
+            frame.pack();
+        }
     }
 
     public static void framePaint(){
@@ -675,50 +681,78 @@ public class PacmanMap {
         else
             System.out.println("You didn't move! "+packguy.toString());
     }
+    public void run(){ //פעולת הTHREAD
+        while (true) {
+
+            isGot = redG.moves(packguy.getCurrentPanel().getLoc());
+            if (isGot) {
+                while (true)
+                    JOptionPane.showMessageDialog(frame, "you lost!");
+            }
+
+            if (pinkG == null) {
+                if((panelGrid[10][14].isEmpty()) && (redG != null)) {
+                    pinkG = new Ghost(panelGrid[10][14], 0, 5);
+                }
+            }
+            else {
+                isGot = pinkG.moves(packguy.getCurrentPanel().getLoc());
+                if (isGot) {
+                    while (true)
+                        JOptionPane.showMessageDialog(frame, "you lost!");
+                }
+            }
+
+            if (orangeG == null) {
+                if((panelGrid[10][14].isEmpty()) && (pinkG != null)) {
+                    orangeG = new Ghost(panelGrid[10][14], 0, 4);
+                }
+            }
+            else {
+                isGot = orangeG.moves(packguy.getCurrentPanel().getLoc());
+                if (isGot) {
+                    while (true)
+                        JOptionPane.showMessageDialog(frame, "you lost!");
+                }
+            }
+
+            if (cyanG == null) {
+                if((panelGrid[10][14].isEmpty()) && (orangeG != null)) {
+                    cyanG = new Ghost(panelGrid[10][14], 0, 6);
+                }
+            }
+            else {
+                isGot=cyanG.moves(packguy.getCurrentPanel().getLoc());
+                if(isGot) {
+                    while (true)
+                        JOptionPane.showMessageDialog(frame, "you lost!");
+                }
+            }
+
+            framePaint();
+            try {
+                Thread.sleep(333);
+            }
+            catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            //System.out.println(panelGrid[10][14].toString());
+        }
+    }
     public static void handle(){
         if(packguy.getCurrentPanel().getContain()==1)
             ballsCount--;
         packguy.getCurrentPanel().setContain(3);
         if(ballsCount==0)
             JOptionPane.showMessageDialog(frame, "you won!");
-        boolean isGot=false;
+        //boolean isGot=false;
         //if(isMoved){
-            steps++;
-            isGot=redG.moves(packguy.getCurrentPanel().getLoc());
-            if(isGot)
-                while (true)
-                    JOptionPane.showMessageDialog(frame, "you lost!");
-            if(steps==2){
-                pinkG=new Ghost(panelGrid[10][14], 0, 5);
-            }
-            if(steps>1) {
-                isGot = pinkG.moves(packguy.getCurrentPanel().getLoc());
-                if(isGot)
-                    while (true)
-                        JOptionPane.showMessageDialog(frame, "you lost!");
-                if (steps == 3) {
-                    orangeG = new Ghost(panelGrid[10][14], 0, 4);
-                }
-                if (steps > 2) {
-                    isGot=orangeG.moves(packguy.getCurrentPanel().getLoc());
-                    if(isGot)
-                        while (true)
-                            JOptionPane.showMessageDialog(frame, "you lost!");
-                    if (steps == 4) {
-                        cyanG = new Ghost(panelGrid[10][14], 0, 6);
-                    }
-                    if (steps > 3) {
-                        isGot=cyanG.moves(packguy.getCurrentPanel().getLoc());
-                        if(isGot)
-                            while (true)
-                                JOptionPane.showMessageDialog(frame, "you lost!");
-                    }
-                }
-            }
-       // }
-        System.out.println("");
+        steps++;
+        if(steps==1) {
+            PacmanMap thread = new PacmanMap();
+            thread.start();
+        }
         framePaint();
-
     }
 
     private void processKeys(){
