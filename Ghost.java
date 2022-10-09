@@ -81,48 +81,48 @@ public class Ghost {
                 case 4: {
                     if(canMove()) {
                         temp = rand.nextInt(4);
-                        System.out.print("ORANGE loc:" + this.currentPanel.getLoc().toString() + "; ");
+                       // System.out.print("ORANGE loc:" + this.currentPanel.getLoc().toString() + "; ");
                         if (temp == 0)//תבדוק אם אפשר לזוז שמאלה
                         {
-                            System.out.print("can i go left?; ");
+                        //    System.out.print("can i go left?; ");
                             if (this.currentPanel.canBefore() > 1) {
-                                System.out.println("yes! going left");
+                             //   System.out.println("yes! going left");
                                 moveLeft();
                             } else {
-                                System.out.print("no! i'll try again; ");
+                              //  System.out.print("no! i'll try again; ");
                                 moves(loc);
                             }
                         }
                         if (temp == 1)//תבדוק אם אפשר לזוז למעלה
                         {
-                            System.out.print("can i go up?; ");
+                       //     System.out.print("can i go up?; ");
                             if (this.currentPanel.canUp() > 1) {
-                                System.out.println("yes! going up");
+                         //       System.out.println("yes! going up");
                                 moveUp();
                             } else {
-                                System.out.print("no! i'll try again; ");
+                          //      System.out.print("no! i'll try again; ");
                                 moves(loc);
                             }
                         }
                         if (temp == 2)//תבדוק אם אפשר לזוז ימינה
                         {
-                            System.out.print("can i go right?; ");
+                         //   System.out.print("can i go right?; ");
                             if (this.currentPanel.canNext() > 1) {
-                                System.out.println("yes! going right");
+                           //     System.out.println("yes! going right");
                                 moveRight();
                             } else {
-                                System.out.print("no! i'll try again; ");
+                            //    System.out.print("no! i'll try again; ");
                                 moves(loc);
                             }
                         }
                         if (temp == 3)//תבדוק אם אפשר לזוז למטה
                         {
-                            System.out.print("can i go down?; ");
+                       //     System.out.print("can i go down?; ");
                             if (this.currentPanel.canDown() > 1) {
-                                System.out.println("yes! going down");
+                            //    System.out.println("yes! going down");
                                 moveDown();
                             } else {
-                                System.out.print("no! i'll try again; ");
+                             //   System.out.print("no! i'll try again; ");
                                 moves(loc);
                             }
                         }
@@ -132,24 +132,24 @@ public class Ghost {
                 case 5: {
                     if(canMove()) {
                         direction = this.currentPanel.getLoc().relative(loc);
-                        System.out.print("PINK loc: " + this.currentPanel.getLoc().toString() + "; ");
+                        //System.out.print("PINK loc: " + this.currentPanel.getLoc().toString() + "; ");
                         if (direction == 1) {
-                            System.out.print("packman is relative right; ");
+                         //   System.out.print("packman is relative right; ");
                             if (currentPanel.canNext() > 1) {
-                                System.out.println("so im going right!");
+                              //  System.out.println("so im going right!");
                                 moveRight();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("going up cuz right is blocked!");
+                                   //     System.out.println("going up cuz right is blocked!");
                                         moveUp();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("going down cuz right is blocked!");
+                                    //    System.out.println("going down cuz right is blocked!");
                                         moveDown();
                                     } else
                                         moves(loc);
@@ -157,47 +157,47 @@ public class Ghost {
                             }
                         } //פקמן נמצא מימין, אם אי אפשר לזוז ימינה, יזוז למעלה/למטה
                         if (direction == 2) {
-                            System.out.print("packman is relative down-right; ");
+                       //     System.out.print("packman is relative down-right; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canDown() > 1) || (currentPanel.canNext() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving right; ");
+                              //      System.out.print("so i'll try moving right; ");
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("moving right!");
+                              //          System.out.println("moving right!");
                                         moveRight();
                                     } else {
-                                        System.out.println("cant moving right, so moving down!");
+                          //              System.out.println("cant moving right, so moving down!");
                                         moveDown();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving down; ");
+                           //         System.out.print("so i'll try moving down; ");
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("moving down!");
+                                 //       System.out.println("moving down!");
                                         moveDown();
                                     } else {
-                                        System.out.println("cant moving down, so moving right!");
+                                  //      System.out.println("cant moving down, so moving right!");
                                         moveRight();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("cant go right or down so moving left!");
+                                //        System.out.println("cant go right or down so moving left!");
                                         moveLeft();
                                     } else {
                                         if (currentPanel.canUp() > 1) {
-                                            System.out.println("cant go right or down so moving up!");
+                                   //         System.out.println("cant go right or down so moving up!");
                                             moveUp();
                                         } else
                                             moves(loc);
                                     }
                                 } else {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("cant go right or down so moving up!");
+                                //        System.out.println("cant go right or down so moving up!");
                                         moveUp();
                                     } else {
                                         if (currentPanel.canBefore() > 1) {
-                                            System.out.println("cant go right or down so moving left!");
+                                     //       System.out.println("cant go right or down so moving left!");
                                             moveLeft();
                                         } else
                                             moves(loc);
@@ -206,22 +206,22 @@ public class Ghost {
                             }
                         } //פקמן נמצא בכיוון יחסי של ימין-למטה, יזוז לאחד מהשניים, אם לא ניתן לשניהם, יזוז למעלה/שמאלה
                         if (direction == 3) {
-                            System.out.print("packman is relative down; ");
+                         //   System.out.print("packman is relative down; ");
                             if (currentPanel.canDown() > 1) {
-                                System.out.println("so im going down!");
+                             //   System.out.println("so im going down!");
                                 moveDown();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("going left cuz down is blocked!");
+                             //           System.out.println("going left cuz down is blocked!");
                                         moveLeft();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("going right cuz down is blocked!");
+                              //          System.out.println("going right cuz down is blocked!");
                                         moveRight();
                                     } else
                                         moves(loc);
@@ -229,36 +229,36 @@ public class Ghost {
                             }
                         } //פקמן נמצא למטה, אם אי אפשר לזוז למטה, יזוז ימינה/שמאלה
                         if (direction == 4) {
-                            System.out.print("packman is relative down-left; ");
+                        //    System.out.print("packman is relative down-left; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canDown() > 1) || (currentPanel.canBefore() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving left; ");
+                                 //   System.out.print("so i'll try moving left; ");
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("moving left!");
+                                 //       System.out.println("moving left!");
                                         moveLeft();
                                     } else {
-                                        System.out.println("cant moving left, so moving down!");
+                                    //    System.out.println("cant moving left, so moving down!");
                                         moveDown();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving down; ");
+                                  //  System.out.print("so i'll try moving down; ");
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("moving down!");
+                                   //     System.out.println("moving down!");
                                         moveDown();
                                     } else {
-                                        System.out.println("cant moving down, so moving left!");
+                                      //  System.out.println("cant moving down, so moving left!");
                                         moveLeft();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("cant go left or down so moving right!");
+                                   //     System.out.println("cant go left or down so moving right!");
                                         moveRight();
                                     } else {
                                         if (currentPanel.canUp() > 1) {
-                                            System.out.println("cant go left or down so moving up!");
+                                    //        System.out.println("cant go left or down so moving up!");
                                             moveUp();
                                         } else {
                                             moves(loc);
@@ -266,11 +266,11 @@ public class Ghost {
                                     }
                                 } else {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("cant go left or down so moving up!");
+                                    //    System.out.println("cant go left or down so moving up!");
                                         moveUp();
                                     } else {
                                         if (currentPanel.canNext() > 1) {
-                                            System.out.println("cant go left or down so moving right!");
+                                  //          System.out.println("cant go left or down so moving right!");
                                             moveRight();
                                         } else
                                             moves(loc);
@@ -279,22 +279,22 @@ public class Ghost {
                             }
                         } //פקמן נמצא בכיוון יחסי של שמאל-למטה, יזוז לאחד מהשניים, אם לא ניתן לשניהם, יזוז למעלה/ימינה
                         if (direction == 5) {
-                            System.out.print("packman is relative left; ");
+                         //   System.out.print("packman is relative left; ");
                             if (currentPanel.canBefore() > 1) {
-                                System.out.println("so im going left!");
+                          //      System.out.println("so im going left!");
                                 moveLeft();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("going up cuz left is blocked!");
+                          //              System.out.println("going up cuz left is blocked!");
                                         moveUp();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("going down cuz left is blocked!");
+                              //          System.out.println("going down cuz left is blocked!");
                                         moveDown();
                                     } else
                                         moves(loc);
@@ -302,47 +302,47 @@ public class Ghost {
                             }
                         } //פקמן נמצא משמאל, אם אי אפשר לזוז שמאלה, יזוז למעלה/למטה
                         if (direction == 6) {
-                            System.out.print("packman is relative up-left; ");
+                         //   System.out.print("packman is relative up-left; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canUp() > 1) || (currentPanel.canBefore() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving left; ");
+                              //      System.out.print("so i'll try moving left; ");
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("moving left!");
+                                 //       System.out.println("moving left!");
                                         moveLeft();
                                     } else {
-                                        System.out.println("cant moving left, so moving up!");
+                               //         System.out.println("cant moving left, so moving up!");
                                         moveUp();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving up; ");
+                              //      System.out.print("so i'll try moving up; ");
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("moving up!");
+                                 //       System.out.println("moving up!");
                                         moveUp();
                                     } else {
-                                        System.out.println("cant moving up, so moving left!");
+                                 //       System.out.println("cant moving up, so moving left!");
                                         moveLeft();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("cant go left or up so moving right!");
+                             //           System.out.println("cant go left or up so moving right!");
                                         moveRight();
                                     } else {
                                         if (currentPanel.canDown() > 1) {
-                                            System.out.println("cant go left or up so moving down!");
+                               //             System.out.println("cant go left or up so moving down!");
                                             moveDown();
                                         } else
                                             moves(loc);
                                     }
                                 } else {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("cant go left or up so moving down!");
+                              //          System.out.println("cant go left or up so moving down!");
                                         moveDown();
                                     } else {
                                         if (currentPanel.canNext() > 1) {
-                                            System.out.println("cant go left or up so moving right!");
+                                //            System.out.println("cant go left or up so moving right!");
                                             moveRight();
                                         } else
                                             moves(loc);
@@ -351,22 +351,22 @@ public class Ghost {
                             }
                         } //פקמן נמצא בכיוון יחסי של שמאל-למעלה, יזוז לאחד מהשניים, אם לא ניתן לשניהם, יזוז למטה/ימינה
                         if (direction == 7) {
-                            System.out.print("packman is relative up; ");
+                        //    System.out.print("packman is relative up; ");
                             if (currentPanel.canUp() > 1) {
-                                System.out.println("so im going up!");
+                         //       System.out.println("so im going up!");
                                 moveUp();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("going left cuz up is blocked!");
+                       //                 System.out.println("going left cuz up is blocked!");
                                         moveLeft();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("going right cuz up is blocked!");
+                     //                   System.out.println("going right cuz up is blocked!");
                                         moveRight();
                                     } else
                                         moves(loc);
@@ -374,47 +374,47 @@ public class Ghost {
                             }
                         } //פקמן נמצא מעל, אם אי אפשר לזוז למעלה, יזוז ימינה/שמאלה
                         if (direction == 8) {
-                            System.out.print("packman is relative up-right; ");
+                   //         System.out.print("packman is relative up-right; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canUp() > 1) || (currentPanel.canNext() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving right; ");
+                        //            System.out.print("so i'll try moving right; ");
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("moving right!");
+                                //        System.out.println("moving right!");
                                         moveRight();
                                     } else {
-                                        System.out.println("cant moving right, so moving up!");
+                                  //      System.out.println("cant moving right, so moving up!");
                                         moveUp();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving up; ");
+                                    //System.out.print("so i'll try moving up; ");
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("moving up!");
+                                      //  System.out.println("moving up!");
                                         moveUp();
                                     } else {
-                                        System.out.println("cant moving up, so moving right!");
+                                        //System.out.println("cant moving up, so moving right!");
                                         moveRight();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("cant go right or up so moving left!");
+                                        //System.out.println("cant go right or up so moving left!");
                                         moveLeft();
                                     } else {
                                         if (currentPanel.canDown() > 1) {
-                                            System.out.println("cant go right or up so moving down!");
+                                          //  System.out.println("cant go right or up so moving down!");
                                             moveDown();
                                         } else
                                             moves(loc);
                                     }
                                 } else {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("cant go right or up so moving down!");
+                                 //       System.out.println("cant go right or up so moving down!");
                                         moveDown();
                                     } else {
                                         if (currentPanel.canBefore() > 1) {
-                                            System.out.println("cant go right or up so moving left!");
+                                   //         System.out.println("cant go right or up so moving left!");
                                             moveLeft();
                                         } else
                                             moves(loc);
@@ -428,24 +428,24 @@ public class Ghost {
                 case 6: {
                     if(canMove()) {
                         direction = this.currentPanel.getLoc().relative(loc);
-                        System.out.print("CYAN loc: " + this.currentPanel.getLoc().toString() + "; ");
+                        //System.out.print("CYAN loc: " + this.currentPanel.getLoc().toString() + "; ");
                         if (direction == 1) {
-                            System.out.print("packman is relative right; ");
+                            //System.out.print("packman is relative right; ");
                             if (currentPanel.canBefore() > 1) {
-                                System.out.println("so im going left!");
+                                //System.out.println("so im going left!");
                                 moveLeft();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("going up cuz left is blocked!");
+                                        //System.out.println("going up cuz left is blocked!");
                                         moveUp();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("going down cuz left is blocked!");
+                                        //System.out.println("going down cuz left is blocked!");
                                         moveDown();
                                     } else
                                         moves(loc);
@@ -453,47 +453,47 @@ public class Ghost {
                             }
                         } //פקמן נמצא מימין, אם אי אפשר לזוז שמאלה, יזוז למעלה/למטה
                         if (direction == 2) {
-                            System.out.print("packman is relative down-right; ");
+                            //System.out.print("packman is relative down-right; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canUp() > 1) || (currentPanel.canBefore() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving left; ");
+                                   // System.out.print("so i'll try moving left; ");
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("moving left!");
+                                        //System.out.println("moving left!");
                                         moveLeft();
                                     } else {
-                                        System.out.println("cant moving left, so moving up!");
+                                       // System.out.println("cant moving left, so moving up!");
                                         moveUp();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving up; ");
+                                  //  System.out.print("so i'll try moving up; ");
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("moving up!");
+                                       // System.out.println("moving up!");
                                         moveUp();
                                     } else {
-                                        System.out.println("cant moving up, so moving left!");
+                                    //    System.out.println("cant moving up, so moving left!");
                                         moveLeft();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("cant go left or up so moving right!");
+                                       // System.out.println("cant go left or up so moving right!");
                                         moveRight();
                                     } else {
                                         if (currentPanel.canDown() > 1) {
-                                            System.out.println("cant go left or up so moving down!");
+                                         //   System.out.println("cant go left or up so moving down!");
                                             moveDown();
                                         } else
                                             moves(loc);
                                     }
                                 } else {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("cant go left or up so moving down!");
+                                      //  System.out.println("cant go left or up so moving down!");
                                         moveDown();
                                     } else {
                                         if (currentPanel.canNext() > 1) {
-                                            System.out.println("cant go left or up so moving right!");
+                                         //   System.out.println("cant go left or up so moving right!");
                                             moveRight();
                                         } else
                                             moves(loc);
@@ -502,22 +502,22 @@ public class Ghost {
                             }
                         } //פקמן נמצא בכיוון יחסי של ימין-למטה, יזוז לאחד מהשניים האחרים, אם לא ניתן לברוח, יזוז לאחד הכיוונים
                         if (direction == 3) {
-                            System.out.print("packman is relative down; ");
+                          //  System.out.print("packman is relative down; ");
                             if (currentPanel.canUp() > 1) {
-                                System.out.println("so im going up!");
+                               // System.out.println("so im going up!");
                                 moveUp();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("going left cuz up is blocked!");
+                                     //  System.out.println("going left cuz up is blocked!");
                                         moveLeft();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("going right cuz up is blocked!");
+                                      //  System.out.println("going right cuz up is blocked!");
                                         moveRight();
                                     } else
                                         moves(loc);
@@ -525,47 +525,47 @@ public class Ghost {
                             }
                         } //פקמן נמצא למטה, אם אי אפשר לזוז למעלה, יזוז ימינה/שמאלה
                         if (direction == 4) {
-                            System.out.print("packman is relative down-left; ");
+                          //  System.out.print("packman is relative down-left; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canUp() > 1) || (currentPanel.canNext() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving right; ");
+                                   // System.out.print("so i'll try moving right; ");
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("moving right!");
+                                        //System.out.println("moving right!");
                                         moveRight();
                                     } else {
-                                        System.out.println("cant moving right, so moving up!");
+                                      //  System.out.println("cant moving right, so moving up!");
                                         moveUp();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving up; ");
+                                 //   System.out.print("so i'll try moving up; ");
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("moving up!");
+                                      //  System.out.println("moving up!");
                                         moveUp();
                                     } else {
-                                        System.out.println("cant moving up, so moving right!");
+                                       // System.out.println("cant moving up, so moving right!");
                                         moveRight();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("cant go right or up so moving left!");
+                                     //   System.out.println("cant go right or up so moving left!");
                                         moveLeft();
                                     } else {
                                         if (currentPanel.canDown() > 1) {
-                                            System.out.println("cant go right or up so moving down!");
+                                          //  System.out.println("cant go right or up so moving down!");
                                             moveDown();
                                         } else
                                             moves(loc);
                                     }
                                 } else {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("cant go right or up so moving down!");
+                                      //  System.out.println("cant go right or up so moving down!");
                                         moveDown();
                                     } else {
                                         if (currentPanel.canBefore() > 1) {
-                                            System.out.println("cant go right or up so moving left!");
+                                          //  System.out.println("cant go right or up so moving left!");
                                             moveLeft();
                                         } else
                                             moves(loc);
@@ -574,22 +574,22 @@ public class Ghost {
                             }
                         } //פקמן נמצא בכיוון יחסי של שמאל-למטה, יזוז לאחד מהשניים האחרים, אם לא ניתן לברוח, יזוז לאחד הכיוונים
                         if (direction == 5) {
-                            System.out.print("packman is relative left; ");
+                          //  System.out.print("packman is relative left; ");
                             if (currentPanel.canNext() > 1) {
-                                System.out.println("so im going right!");
+                               // System.out.println("so im going right!");
                                 moveRight();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("going up cuz right is blocked!");
+                                     //   System.out.println("going up cuz right is blocked!");
                                         moveUp();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("going down cuz right is blocked!");
+                                     //   System.out.println("going down cuz right is blocked!");
                                         moveDown();
                                     } else
                                         moves(loc);
@@ -597,47 +597,47 @@ public class Ghost {
                             }
                         } //פקמן נמצא משמאל, אם אי אפשר לזוז ימינה, יזוז למעלה/למטה
                         if (direction == 6) {
-                            System.out.print("packman is relative up-left; ");
+                           // System.out.print("packman is relative up-left; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canDown() > 1) || (currentPanel.canNext() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving right; ");
+                                  //  System.out.print("so i'll try moving right; ");
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("moving right!");
+                                     //   System.out.println("moving right!");
                                         moveRight();
                                     } else {
-                                        System.out.println("cant moving right, so moving down!");
+                                        //System.out.println("cant moving right, so moving down!");
                                         moveDown();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving down; ");
+                                  //  System.out.print("so i'll try moving down; ");
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("moving down!");
+                                      //  System.out.println("moving down!");
                                         moveDown();
                                     } else {
-                                        System.out.println("cant moving down, so moving right!");
+                                      //  System.out.println("cant moving down, so moving right!");
                                         moveRight();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("cant go right or down so moving left!");
+                                      //  System.out.println("cant go right or down so moving left!");
                                         moveLeft();
                                     } else {
                                         if (currentPanel.canUp() > 1) {
-                                            System.out.println("cant go right or down so moving up!");
+                                         //   System.out.println("cant go right or down so moving up!");
                                             moveUp();
                                         } else
                                             moves(loc);
                                     }
                                 } else {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("cant go right or down so moving up!");
+                                      //  System.out.println("cant go right or down so moving up!");
                                         moveUp();
                                     } else {
                                         if (currentPanel.canBefore() > 1) {
-                                            System.out.println("cant go right or down so moving left!");
+                                         //   System.out.println("cant go right or down so moving left!");
                                             moveLeft();
                                         } else
                                             moves(loc);
@@ -646,22 +646,22 @@ public class Ghost {
                             }
                         } //פקמן נמצא בכיוון יחסי של שמאל-למעלה, יזוז לאחד מהשניים האחרים, אם לא ניתן לברוח, יזוז לאחד הכיוונים
                         if (direction == 7) {
-                            System.out.print("packman is relative up; ");
+                           // System.out.print("packman is relative up; ");
                             if (currentPanel.canDown() > 1) {
-                                System.out.println("so im going down!");
+                               // System.out.println("so im going down!");
                                 moveDown();
                             } else {
                                 temp = rand.nextInt(2);
                                 if (temp == 0) {
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("going left cuz down is blocked!");
+                                    //    System.out.println("going left cuz down is blocked!");
                                         moveLeft();
                                     } else
                                         moves(loc);
                                 }
                                 if (temp == 1) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("going right cuz down is blocked!");
+                                      //  System.out.println("going right cuz down is blocked!");
                                         moveRight();
                                     } else
                                         moves(loc);
@@ -669,36 +669,36 @@ public class Ghost {
                             }
                         } //פקמן נמצא מעל, אם אי אפשר לזוז למטה, יזוז ימינה/שמאלה
                         if (direction == 8) {
-                            System.out.print("packman is relative up-right; ");
+                         //   System.out.print("packman is relative up-right; ");
                             temp = rand.nextInt(2);
                             if ((currentPanel.canDown() > 1) || (currentPanel.canBefore() > 1)) {
                                 if (temp == 0) {
-                                    System.out.print("so i'll try moving left; ");
+                                 //   System.out.print("so i'll try moving left; ");
                                     if (currentPanel.canBefore() > 1) {
-                                        System.out.println("moving left!");
+                                     //   System.out.println("moving left!");
                                         moveLeft();
                                     } else {
-                                        System.out.println("cant moving left, so moving down!");
+                                      //  System.out.println("cant moving left, so moving down!");
                                         moveDown();
                                     }
                                 } else {
-                                    System.out.print("so i'll try moving down; ");
+                                  //  System.out.print("so i'll try moving down; ");
                                     if (currentPanel.canDown() > 1) {
-                                        System.out.println("moving down!");
+                                     //   System.out.println("moving down!");
                                         moveDown();
                                     } else {
-                                        System.out.println("cant moving down, so moving left!");
+                                      //  System.out.println("cant moving down, so moving left!");
                                         moveLeft();
                                     }
                                 }
                             } else {
                                 if (temp == 0) {
                                     if (currentPanel.canNext() > 1) {
-                                        System.out.println("cant go left or down so moving right!");
+                                   //     System.out.println("cant go left or down so moving right!");
                                         moveRight();
                                     } else {
                                         if (currentPanel.canUp() > 1) {
-                                            System.out.println("cant go left or down so moving up!");
+                                          //  System.out.println("cant go left or down so moving up!");
                                             moveUp();
                                         } else {
                                             moves(loc);
@@ -706,11 +706,11 @@ public class Ghost {
                                     }
                                 } else {
                                     if (currentPanel.canUp() > 1) {
-                                        System.out.println("cant go left or down so moving up!");
+                                    //    System.out.println("cant go left or down so moving up!");
                                         moveUp();
                                     } else {
                                         if (currentPanel.canNext() > 1) {
-                                            System.out.println("cant go left or down so moving right!");
+                                        //    System.out.println("cant go left or down so moving right!");
                                             moveRight();
                                         } else
                                             moves(loc);
