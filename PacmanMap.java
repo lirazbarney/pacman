@@ -27,6 +27,7 @@ public class PacmanMap {
     public static JPanel panelbuttons;
     public static boolean isGot = false;
     public static int keyPressed, lastkey;
+    public static int cyanTimer=333, redTimer=333, orangeTimer=333, pinkTimer=333;
 
     PacmanMap() {
         if (steps == 0) {
@@ -754,7 +755,103 @@ public class PacmanMap {
         steps++;
         if (steps == 1) {
             lastkey = keyPressed;
-            Thread t1 = new Thread(new Runnable() { //הthread של הרוחות
+            Thread tr = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        isGot = redG.moves(packguy.getCurrentPanel().getLoc());
+                        if (isGot) {
+                            while (true)
+                                JOptionPane.showMessageDialog(frame, "you lost!");
+                        }
+                        framePaint();
+                        try {
+                            Thread.sleep(redTimer);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                    }
+                }
+            });
+            tr.start();
+            Thread tp = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (true) {
+                        if (pinkG == null) {
+                            if ((panelGrid[10][14].isEmpty()) && (redG != null)) {
+                                pinkG = new Ghost(panelGrid[10][14], 0, 5);
+                            }
+                        } else {
+                            isGot = pinkG.moves(packguy.getCurrentPanel().getLoc());
+                            if (isGot) {
+                                while (true)
+                                    JOptionPane.showMessageDialog(frame, "you lost!");
+                            }
+                        }
+                        framePaint();
+                        try {
+                            Thread.sleep(pinkTimer);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                    }
+                }
+            });
+            tp.start();
+            Thread to = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(true) {
+                        if (orangeG == null) {
+                            if ((panelGrid[10][14].isEmpty()) && (pinkG != null)) {
+                                orangeG = new Ghost(panelGrid[10][14], 0, 4);
+                            }
+                        } else {
+                            isGot = orangeG.moves(packguy.getCurrentPanel().getLoc());
+                            if (isGot) {
+                                while (true)
+                                    JOptionPane.showMessageDialog(frame, "you lost!");
+                            }
+                        }
+                        framePaint();
+                        try {
+                            Thread.sleep(orangeTimer);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                    }
+                }
+            });
+            to.start();
+            Thread tc = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(true){
+                        if (cyanG == null) {
+                            if ((panelGrid[10][14].isEmpty()) && (orangeG != null)) {
+                                cyanG = new Ghost(panelGrid[10][14], 0, 6);
+                            }
+                        } else {
+                            isGot = cyanG.moves(packguy.getCurrentPanel().getLoc());
+                            if (isGot) {
+                                while (true)
+                                    JOptionPane.showMessageDialog(frame, "you lost!");
+                            }
+                        }
+
+                        framePaint();
+                        try {
+                            Thread.sleep(cyanTimer);
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                        }
+                    }
+                }
+            });
+            tc.start();
+
+            /*Thread t1 = new Thread(new Runnable() { //הthread של הרוחות
                 @Override
                 public void run() {
                     while (true) {
@@ -810,7 +907,7 @@ public class PacmanMap {
                     }
                 }
             });
-            t1.start();
+            t1.start();*/
         }
         Thread t2 = new Thread(new Runnable() {
             @Override
